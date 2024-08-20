@@ -182,23 +182,23 @@ resource "google_compute_subnetwork" "subnet-difinition" {
 #   direction = "EGRESS"
 # }
 
-# resource "google_compute_firewall" "firewall_difinition5" {
-#   name    = "hskim-sec-bastion-in-allow-2022"
-#   network = google_compute_network.vpc-difinition.name
-#   description = "[SEC-BDA-FW-Rule] - 수원사업장(210.94.41.89/32)에서 bastion VM  SSH 접속 Ingress 통신 허용"
+resource "google_compute_firewall" "firewall_difinition5" {
+  name    = "hskim-sec-bastion-in-allow-2022"
+  network = google_compute_network.vpc-difinition.name
+  description = "[SEC-BDA-FW-Rule] - 수원사업장(210.94.41.89/32)에서 bastion VM  SSH 접속 Ingress 통신 허용"
 
-#   priority = 1000
+  priority = 1000
 
-#   allow {
-#     protocol = "tcp"
-#     ports = ["2022"]
-#   }
+  allow {
+    protocol = "tcp"
+    ports = ["22","2022"]
+  }
 
-#   source_ranges = ["211.189.57.60/32", "210.94.41.89/32"]
-#   target_tags = ["hskim-net-bastion"]
+  source_ranges = ["0.0.0.0/0"]
+  target_tags = ["hskim-net-bastion"]
 
-#   direction = "INGRESS"
-# }
+  direction = "INGRESS"
+}
 
 
 # VM 인스턴스 리소스 정의
@@ -209,7 +209,8 @@ resource "google_compute_instance" "my_instance" {
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-12-bookworm-v20240709" # 기본 이미지
+      # Image List 방법 $ gcloud compute images list --project=first-project-hskim
+      image = "rocky-linux-cloud/rocky-linux-8-optimized-gcp-v20240717" # 기본 이미지
       type = "pd-standard" # 이미지 타입 pd-standard, pd-ssd, pd-balanced
       size = 50 # 단위 GB
     }
@@ -218,18 +219,40 @@ resource "google_compute_instance" "my_instance" {
   network_interface {
     network = google_compute_network.vpc-difinition.id
     subnetwork = google_compute_subnetwork.subnet-difinition.id
-    # access_config {} # ExternalIP 부분
+    access_config {} # ExternalIP 부분
     
   }
 
-  tags = ["example"] # Network Tag 추가
+  tags = ["hskim-net-bastion"] # Network Tag 추가
 
   labels = {
     hskim = "test"
   }
   
-  metadata = {
-    ssh-keys = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQChg5ihMjks3vcfQii4NfVkqirM5yDQCKrNiYyBkj1Qkm0Ip3wNNj1NBzl/lg1aCjabvbrFfAKDFqZZsM4zVMbT8QcDQ8rmrPo/QgIGmFh/QLIZpF35jPtvZzcxEsMMvALDXjAJ9RNcq83Z7+7FLxpM4vz0siw3P+yjxAjiMgpfm7uun5A5mrxYohHwixAwXvqZ/vvBZdlGEq3wT/Y4sOhMjg87c3kPGuDchDSkukQE+Lz5iUnqDdL8z4XPvxCZxlNdt9xVxY6qtmwlolBVxNC1fOc0sy2T9SZEHg9OimQQex+vEhJQ5O3jlmVIqclZ1TbfSg5tBbalZtcAWdG49cH5oC5SlM/g9yArKJ/ubXPArPaIOAdgl5+yYcGh51r+7z7kwJD5rffxqj4dvYMIFO5Vvhab93Wlyb2YOoAFsXy/Ct5CSgGPsyHgIqoaUOZlwdQCHhgE3/Wmz5WvTf8fsjty+74ca8zMyhcth6iFfEDMeiKZajlNdTyvmdNTsBdmJ0k= hskim"
+  service_account {
+    email = "gcp-terraform-account@first-project-hskim.iam.gserviceaccount.com"
+    scopes = ["https://www.googleapis.com/auth/cloud-platform"]
+    # scopes = ["https://www.googleapis.com/auth/cloud-platform.read-only",
+    # "https://www.googleapis.com/auth/logging.write",
+    # "https://www.googleapis.com/auth/monitoring.write",
+    # "https://www.googleapis.com/auth/pubsub",
+    # "https://www.googleapis.com/auth/service.management.readonly",
+    # "https://www.googleapis.com/auth/servicecontrol",
+    # "https://www.googleapis.com/auth/trace.append"]
+  }
+
+    metadata = {
+    # ssh-keys = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQChg5ihMjks3vcfQii4NfVkqirM5yDQCKrNiYyBkj1Qkm0Ip3wNNj1NBzl/lg1aCjabvbrFfAKDFqZZsM4zVMbT8QcDQ8rmrPo/QgIGmFh/QLIZpF35jPtvZzcxEsMMvALDXjAJ9RNcq83Z7+7FLxpM4vz0siw3P+yjxAjiMgpfm7uun5A5mrxYohHwixAwXvqZ/vvBZdlGEq3wT/Y4sOhMjg87c3kPGuDchDSkukQE+Lz5iUnqDdL8z4XPvxCZxlNdt9xVxY6qtmwlolBVxNC1fOc0sy2T9SZEHg9OimQQex+vEhJQ5O3jlmVIqclZ1TbfSg5tBbalZtcAWdG49cH5oC5SlM/g9yArKJ/ubXPArPaIOAdgl5+yYcGh51r+7z7kwJD5rffxqj4dvYMIFO5Vvhab93Wlyb2YOoAFsXy/Ct5CSgGPsyHgIqoaUOZlwdQCHhgE3/Wmz5WvTf8fsjty+74ca8zMyhcth6iFfEDMeiKZajlNdTyvmdNTsBdmJ0k= hskim"
+  
+    startup-script = <<-EOF
+      #!/bin/bash
+      sed -i 's/#Port 22/Port 2022/g' /etc/ssh/sshd_config
+      sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+      setenforce 0
+      sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
+      service sshd restart
+      systemctl restart sshd
+      EOF
   }
 }
 

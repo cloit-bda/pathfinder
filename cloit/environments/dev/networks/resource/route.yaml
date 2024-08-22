@@ -1,0 +1,8 @@
+- name: cloit-d-host-rou-internet
+  description: default
+  destination_range: 10.0.0.0/24
+  next_hop_internet: instance-name
+  priority: 1000
+  tags:
+    - tag1
+    - tag2

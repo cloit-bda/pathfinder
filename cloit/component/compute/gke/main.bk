@@ -1,0 +1,62 @@
+
+/**
+모듈을 호출 할 경우 GKE와 함께 의존되는 리소스 전체를 생성해야 함.
+module "gke" {
+  for_each = {for cluster in local.gke : cluster.cluster_name => cluster}
+
+  source = "../../../modules/gke/private-cluster"
+  project_id = each.value.project_id
+  name = each.value.cluster_name
+  region = each.value.region
+  network = each.value.network
+  subnetwork = each.value.subnetwork
+  master_ipv4_cidr_block = each.value.master_ipv4_cidr
+
+  ip_range_pods = each.value.cluster_ipv4_cidr
+  ip_range_services = each.value.services_ipv4_cidr
+
+  node_pools = [
+    for pool in each.value.node_pools : {
+      name = pool.name
+      machine_type = pool.machine_type
+      disk_size_gb = pool.disk_size_gb
+      image_type = pool.image_type
+      service_account = pool.service_account
+      tags = pool.tags != null ? [pool.tags] : []  # Handle optional tags
+      initial_node_count = pool.initial_node_count
+    }
+  ]
+
+  node_pools_oauth_scopes = {
+    all = []
+    default-node-pool = ["https://www.googleapis.com/auth/cloud-platform"]
+  }
+
+  node_pools_labels = {
+    all = {}
+    default-node-pool = {default-node-pool = true}
+  }
+
+  node_pools_metadata = {
+    all = {}
+    default-node-pool = {node-pool-metadata-custom-value = "my-node-pool"}
+  }
+
+  node_pools_taints = {
+    all = []
+    default-node-pool = [
+      {
+        key    = "default-node-pool"
+        value  = "true"
+        effect = "PREFER_NO_SCHEDULE"
+      }
+    ]
+  }
+
+  node_pools_tags = {
+    all = []
+    default-node-pool = ["default-node-pool"]
+  }
+}
+
+**/

@@ -1,0 +1,50 @@
+---
+name: cloit-d-host-nat-an3
+enableDynamicPortAllocation: true
+enableEndpointIndependentMapping: false
+icmpIdleTimeoutSec: 30
+maxPortsPerVm: 65536
+minPortsPerVm: 32
+natIpAllocateOption: MANUAL_ONLY
+sourceSubnetworkIpRangesToNat: LIST_OF_SUBNETWORKS
+subnetworks:
+  - name: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-data-ce-an3
+    sourceIpRangesToNat:
+      - ALL_IP_RANGES
+  - name: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-system-an3
+    sourceIpRangesToNat:
+      - ALL_IP_RANGES
+  - name: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-dmz-an3
+    sourceIpRangesToNat:
+      - ALL_IP_RANGES
+  - name: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-data-analytics-an3
+    sourceIpRangesToNat:
+      - ALL_IP_RANGES
+  - name: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-gke-config-an3
+    sourceIpRangesToNat:
+      - ALL_IP_RANGES
+  - name: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-gke-lcs-an3
+    sourceIpRangesToNat:
+      - ALL_IP_RANGES
+  - name: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-ce-an3
+    sourceIpRangesToNat:
+      - ALL_IP_RANGES
+  - name: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-dev-an3
+    sourceIpRangesToNat:
+      - ALL_IP_RANGES
+  - name: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-data-cr-an3
+    sourceIpRangesToNat:
+      - ALL_IP_RANGES
+  - name: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-service-gke-dive-an3
+    sourceIpRangesToNat:
+      - ALL_IP_RANGES
+tcpEstablishedIdleTimeoutSec: 1200
+tcpTimeWaitTimeoutSec: 120
+tcpTransitoryIdleTimeoutSec: 30
+udpIdleTimeoutSec: 30
+router: cloit-d-host-rou-internet
+log_config:
+  enable: false
+  filter: "ALL"
+nat_ips:
+  - "https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/addresses/cloit-d-host-eip-nat-an3"

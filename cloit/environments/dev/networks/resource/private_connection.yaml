@@ -1,0 +1,4 @@
+project_id: cloit-host-dev
+network: cloit-d-host-vpc
+service: servicenetworking.googleapis.com
+reserved_peering_range_name: cloit-d-host-gcp-connection

@@ -31,6 +31,46 @@ resource "google_compute_subnetwork" "subnet-difinition" {
   private_ip_google_access = true
 }
 
+
+# 서브넷 정의
+resource "google_compute_subnetwork" "subnet-difinition" {
+  name          = "hskim-subnet"
+  network       = google_compute_network.vpc-difinition.id
+  region        = "asia-northeast3"
+  ip_cidr_range  = "10.0.1.0/24"
+
+  secondary_ip_range = [{
+    range_name = "gke-service-pod"
+    ip_cidr_range = "10.100.64.0/18"
+  },
+  {
+    range_name = "gke-service-service"
+    ip_cidr_range = "10.10.16.0/20"
+  }]
+
+  private_ip_google_access = true
+}
+
+
+# 서브넷 정의
+resource "google_compute_subnetwork" "subnet-difinition" {
+  name          = "hskim-subnet"
+  network       = google_compute_network.vpc-difinition.id
+  region        = "asia-northeast3"
+  ip_cidr_range  = "10.0.1.0/24"
+
+  secondary_ip_range = [{
+    range_name = "gke-service-pod"
+    ip_cidr_range = "10.100.64.0/18"
+  },
+  {
+    range_name = "gke-service-service"
+    ip_cidr_range = "10.10.16.0/20"
+  }]
+
+  private_ip_google_access = true
+}
+
 # # DNS 정의(Cloud DNS API Enabled 해야함)
 # resource "google_dns_managed_zone" "hskim_appspot" {
 #   name        = "hskim-dns-appspot"
@@ -117,6 +157,21 @@ resource "google_compute_subnetwork" "subnet-difinition" {
 # }
 
 # # 방화벽 규칙 정의
+# resource "google_compute_firewall" "firewall_difinition" {
+#   name    = "hskim-deny-all"
+#   network = google_compute_network.vpc-difinition.name
+#   description = "[SEC-BDA-FW-Rule] - (기간 제한 없음) VPC의 VM들에서 외부로 나가는 Egress 트래픽 전부 차단(Deny ALL)"
+
+#   priority = 65534
+
+#   deny {
+#     protocol = "all"
+#     # ports    = ["all"]
+#   }
+
+#   destination_ranges = ["0.0.0.0/0"]
+#   direction = "EGRESS"
+# }# # 방화벽 규칙 정의
 # resource "google_compute_firewall" "firewall_difinition" {
 #   name    = "hskim-deny-all"
 #   network = google_compute_network.vpc-difinition.name

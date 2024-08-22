@@ -1,0 +1,39 @@
+name: cloit-d-host-rou-internet
+nats:
+  - name: cloit-d-host-nat-an3
+    natIpAllocateOption: MANUAL_ONLY
+    natIps:
+      - https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/addresses/cloit-d-host-eip-nat-an3
+    subnetworks:
+      - name: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-data-ce-an3
+        sourceIpRangesToNat:
+          - ALL_IP_RANGES
+      - name: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-system-an3
+        sourceIpRangesToNat:
+          - ALL_IP_RANGES
+      - name: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-dmz-an3
+        sourceIpRangesToNat:
+          - ALL_IP_RANGES
+      - name: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-data-analytics-an3
+        sourceIpRangesToNat:
+          - ALL_IP_RANGES
+      - name: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-gke-config-an3
+        sourceIpRangesToNat:
+          - ALL_IP_RANGES
+      - name: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-gke-lcs-an3
+        sourceIpRangesToNat:
+          - ALL_IP_RANGES
+      - name: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-ce-an3
+        sourceIpRangesToNat:
+          - ALL_IP_RANGES
+      - name: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-dev-an3
+        sourceIpRangesToNat:
+          - ALL_IP_RANGES
+      - name: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-data-cr-an3
+        sourceIpRangesToNat:
+          - ALL_IP_RANGES
+      - name: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-service-gke-dive-an3
+        sourceIpRangesToNat:
+          - ALL_IP_RANGES
+network: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/global/networks/cloit-d-host-vpc
+

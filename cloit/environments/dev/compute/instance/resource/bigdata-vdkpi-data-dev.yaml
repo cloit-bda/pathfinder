@@ -1,0 +1,68 @@
+---
+# JIRA Number :
+# Description:
+# 요청자 :
+## Service account , Scope , Disk
+name: cloit-d-data-nb-analytics-an3b-001
+deletionProtection: false
+disks:
+  - autoDelete: true
+    boot: true
+    deviceName: boot
+    mode: READ_WRITE
+    source: https://www.googleapis.com/compute/v1/projects/cloit-data-dev/zones/asia-northeast3-b/disks/cloit-d-data-nb-analytics-an3b-001-boot
+  - autoDelete: true
+    boot: false
+    deviceName: data
+    mode: READ_WRITE
+    source: https://www.googleapis.com/compute/v1/projects/cloit-data-dev/zones/asia-northeast3-b/disks/cloit-d-data-nb-analytics-an3b-001-data
+labels:
+  goog-caip-notebook: ''
+machineType: n1-standard-4
+metadata:
+  items:
+    - key: enable-guest-attributes
+      value: 'TRUE'
+    - key: framework
+      value: NumPy/SciPy/scikit-learn
+    - key: notebooks-api
+      value: PROD
+    - key: proxy-mode
+      value: service_account
+    - key: restriction
+      value: ''
+    - key: shutdown-script
+      value: /opt/deeplearning/bin/shutdown_script.sh
+    - key: title
+      value: Base.CPU
+    - key: use-collaborative
+      value: 'true'
+    - key: version
+      value: '90'
+    - key: proxy-url
+      value: 4187c6f1a51443d2-dot-asia-northeast3.notebooks.googleusercontent.com
+networkInterfaces:
+  - kind: compute#networkInterface
+    network: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/global/networks/cloit-d-host-vpc
+    networkIP: 172.32.0.8
+    subnetwork: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-data-ce-an3
+scheduling:
+  automaticRestart: true
+  onHostMaintenance: MIGRATE
+  preemptible: false
+  provisioningModel: STANDARD
+serviceAccounts:
+  - email: cloit-d-data-gsa-notebook@cloit-data-dev.iam.gserviceaccount.com
+    scopes:
+      - https://www.googleapis.com/auth/cloud-platform
+      - https://www.googleapis.com/auth/userinfo.email
+shieldedInstanceConfig:
+  enableIntegrityMonitoring: true
+  enableSecureBoot: false
+  enableVtpm: true
+tags:
+  items:
+    - deeplearning-vm
+    - notebook-instance
+zone: https://www.googleapis.com/compute/v1/projects/cloit-data-dev/zones/asia-northeast3-b
+

@@ -1,0 +1,889 @@
+#  Firewall
+#  - 방화벽 작업 시 작업 근거 필수 (ex, Jira Ticket, 결재 문서 등)
+# JIRA :
+# DESCRIPT : 2345
+- name: cloit-d-host-sec-cloudrun-out-allow22222
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 1000
+  description: '[SEC-cloit-FW-Rule] Cloud Run에서 나가는 트레픽 허용[BDP-54236, 54238]'
+  allow:
+    - tcp:
+        - 443
+  targetTags:
+    - vpc-connector-asia-northeast3-cloit-d-data-vac-an3
+  destinationRanges:
+    - 13.125.122.136/32
+    - 176.34.221.38/32
+    - 3.34.65.25/32
+    - 3.39.102.2/32
+    - 44.226.117.157/32
+    - 52.41.193.5/32
+    - 52.80.75.184/32      # bespin lab
+    - 54.217.27.88/32
+    - 54.217.88.217/32
+    - 71.131.251.112/32
+#  Firewall
+#  - 방화벽 작업 시 작업 근거 필수 (ex, Jira Ticket, 결재 문서 등)
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-cloudrun-out-allow
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 1000
+  description: '[SEC-cloit-FW-Rule] Cloud Run에서 나가는 트레픽 허용[BDP-54236, 54238]'
+  allow:
+    - tcp:
+      - 443
+  targetTags:
+    - vpc-connector-asia-northeast3-cloit-d-data-vac-an3
+  destinationRanges:
+    - 13.125.122.136/32
+    - 176.34.221.38/32
+    - 3.34.65.25/32
+    - 3.39.102.2/32
+    - 44.226.117.157/32
+    - 52.41.193.5/32
+    - 52.80.75.184/32      # bespin lab
+    - 54.217.27.88/32
+    - 54.217.88.217/32
+    - 71.131.251.112/32
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-common-out-deny-all
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 65534
+  description: '[SEC-cloit-FW-Rule] (기간 제한 없음) VPC의 VM들에서 외부로 나가는 Egress 트래픽 전부 차단(Deny ALL)'
+  deny:
+    - all:
+  destinationRanges:
+    - 0.0.0.0/0
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-dashboard-in-allow-8088
+  network: cloit-d-host-vpc
+  direction: INGRESS
+  priority: 1000
+  description: 'BDP-55818'
+  allow:
+    - tcp:
+      - 8088
+  targetTags:
+    - cloit-d-net-ce-dashboard
+  sourceRanges:
+    - 203.126.64.67/32
+    - 203.126.64.68/32
+    - 203.126.64.69/32
+    - 203.126.64.70/32     #
+    - 210.118.108.252/32
+    - 210.118.108.253/32
+    - 210.118.108.254/32
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-dashboard-out-allow-80
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 1000
+  description: 'BDP-55674, BDP-55818'
+  allow:
+    - tcp:
+      - 80
+  targetTags:
+    - cloit-d-net-ce-dashboard
+  destinationRanges:
+    - 35.200.77.160
+    - 35.194.105.217
+    - 35.189.131.155
+    - 85.125.190.36
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-db-gateway-common-in-allow-20022
+  network: cloit-d-host-vpc
+  direction: INGRESS
+  priority: 1000
+  description: '[SEC-cloit-FW-Rule] (기간 제한 없음) DB Gateway VM에 SSH 접속하기 위한 Ingress 통신 허용'
+  allow:
+    - tcp:
+      - 20022
+  targetTags:
+    - cloit-d-net-ce-db-cli
+  sourceTags:
+    - cloit-d-net-db-gateway-common
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-db-gateway-common-in-allow-2022
+  network: cloit-d-host-vpc
+  direction: INGRESS
+  priority: 1000
+  description: '[SEC-cloit-FW-Rule]  (기간 제한 없음)- DB Gateway VM에 SSH 접속하기 위한 Ingress 통신 허용'
+  allow:
+    - tcp:
+      - 2022
+  targetTags:
+    - cloit-d-net-db-gateway-common
+  sourceRanges:
+    - 211.189.57.60/32
+    - 210.94.41.89/32
+    - 58.213.161.113/32
+    - 58.213.161.114/32
+    - 58.213.161.115/32
+    - 58.213.161.116/32
+    - 210.118.108.252/32
+    - 210.118.108.253/32
+    - 210.118.108.254/32
+    - 203.126.64.67/32
+    - 203.126.64.68/32
+    - 203.126.64.69/32
+    - 203.126.64.70/32
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-db-gateway-common-out-allow-20022
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 1000
+  description: '[SEC-cloit-FW-Rule] (기간 제한 없음) GCP의 DB Gateway VM에서 DB CLI로 SSH(20022) Engrss 통신 허용'
+  allow:
+    - tcp:
+      - 20022
+  targetTags:
+    - cloit-d-net-db-gateway-common
+  destinationRanges:
+    - 172.30.0.109/32
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-dev-out-allow
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 1000
+  description: '[SEC-cloit-FW-Rule] (기간 제한 없음) 개발 VM에서 eCode(수원사업장)로 나가는 Egress 트래픽 허용'
+  allow:
+    - all:
+  targetTags:
+    - cloit-d-net-ce-dev
+  destinationRanges:
+    - 10.40.202.52/32
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-dev-package-out-allow
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 1000
+  description: '[SEC-cloit-FW-Rule] (기간 제한 없음) 개발 VM에서 package, pythone 등 다운로드 허용'
+  allow:
+    - all:
+  targetTags:
+    - cloit-d-net-ce-dev
+    - cloit-d-net-ce-monitoring
+    - cloit-d-net-gke-config
+    - cloit-d-net-gke-lcs
+    - cloit-d-net-ce-openapi
+    - cloit-d-net-ce-batch
+    - cloit-d-net-ce-logupcheck
+    - cloit-d-net-ce-jenkins
+    - cloit-d-net-ce-smtp
+    - cloit-d-net-ce-loguploader
+    - ansible-test
+    - cloit-d-net-ce-common
+    - niffler
+  destinationRanges:
+    - 0.0.0.0/0
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-elasticsearch-in-deny-9200
+  network: cloit-d-host-vpc
+  direction: INGRESS
+  priority: 500
+  description: 'ElasticSearch 긴급 차단 요청'
+  deny:
+    - tcp:
+      - 9200
+  sourceRanges:
+    - 68.235.43.146/32
+    - 104.223.91.25/32
+    - 62.122.184.77/32
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-gateway-common-in-allow-20022
+  network: cloit-d-host-vpc
+  direction: INGRESS
+  priority: 1000
+  description: '[SEC-cloit-FW-Rule] (기간 제한 없음) GCP의 Gateway VM에서 VPC의 VM으로 SSH(20022) Ingress 통신 허용'
+  allow:
+    - tcp:
+      - 20022
+  targetTags:
+    - cloit-d-net-ce-common
+    - cloit-d-net-ce-batch
+    - cloit-d-net-ce-openapi
+    - cloit-d-net-ce-dev
+    - cloit-d-net-ce-logupcheck
+    - cloit-d-net-ce-dashboard
+    - cloit-d-net-ce-smtp
+    - cloit-d-net-ce-loguploader
+    - cloit-d-net-ce-monitoring
+  sourceTags:
+    - cloit-d-net-gateway-common
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-gateway-common-in-allow-2022
+  network: cloit-d-host-vpc
+  direction: INGRESS
+  priority: 1000
+  description: '[SEC-cloit-FW-Rule] (기간 제한 없음) 수원사업장(210.94.41.89/32)에서 Gateway VM SSH 접속 Ingress 통신 허용'
+  allow:
+    - tcp:
+      - 2022
+  targetTags:
+    - cloit-d-net-gateway-common
+  sourceRanges:
+    - 210.94.41.89/32
+    - 203.244.212.0/24
+    - 203.244.197.0/24
+    - 211.189.57.60/32
+    - 165.225.116.0/23
+    - 165.225.234.0/23
+    - 165.225.112.0/23
+    - 165.225.230.0/23
+    - 210.118.108.252/32
+    - 210.118.108.253/32
+    - 210.118.108.254/32
+    - 203.126.64.67/32
+    - 203.126.64.68/32
+    - 203.126.64.69/32
+    - 203.126.64.70/32
+    - 58.213.161.113/32
+    - 58.213.161.114/32
+    - 58.213.161.115/32
+    - 58.213.161.116/32
+    - 52.80.240.38/32
+    - 54.222.139.6/32
+    - 58.151.93.21/32
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-gateway-common-out-allow-20022
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 1000
+  description: '[SEC-cloit-FW-Rule] (기간 제한 없음) GCP의 Gateway VM에서 VM 설치 대역으로 SSH(20022) Engrss 통신 허용'
+  allow:
+    - tcp:
+      - 20022
+  targetTags:
+    - cloit-d-net-gateway-common
+  destinationRanges:
+    - 172.30.0.64/26
+    - 172.30.0.128/26
+    - 172.30.0.192/26
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-gateway-common-out-deny-all
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 10001
+  description: '[SEC-cloit-FW-Rule] (기간 제한 없음) GCP의 Gateway VM에서 VPC의 모든 VM으로 Engrss 전체 차단'
+  deny:
+    - all:
+  targetTags:
+    - cloit-d-net-gateway-common
+    - cloit-d-net-db-gateway-common
+  destinationRanges:
+    - 0.0.0.0/0
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-gke-master-in-allow
+  network: cloit-d-host-vpc
+  direction: INGRESS
+  priority: 1000
+  description: '[SEC-cloit-FW-Rule]  (기간 제한 없음) GKE Master 통신 : 신규 GKE 구성시  IP range/Network Tag 추가'
+  allow:
+    - tcp:
+      - 443
+      - 10250
+  targetTags:
+    - cloit-d-service-net-dive-gke
+    - cloit-d-data-net-analytics-cps
+    - cloit-d-net-gke-config
+    - cloit-d-net-gke-lcs
+  sourceRanges:
+    - 172.16.30.0/23
+    - 172.16.30.0/28
+    - 172.16.31.16/28
+    - 172.16.31.0/28
+    - 172.16.20.0/28
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-gke-nodes-in-allow
+  network: cloit-d-host-vpc
+  direction: INGRESS
+  priority: 1000
+  description: '[SEC-cloit-FW-Rule]  (기간 제한 없음) GKE Nodes 통신 (Subnet 대역) : 신규 GKE 구성시  IP range/Network Tag 추가'
+  allow:
+    - tcp:
+      - 1-65535
+    - udp:
+      - 1-65535
+    - icmp:
+  targetTags:
+    - cloit-d-service-net-dive-gke
+    - cloit-d-data-net-analytics-cps
+    - cloit-d-net-gke-config
+    - cloit-d-net-gke-lcs
+  sourceRanges:
+    - 111.39.0.0/22
+    - 172.34.4.0/22
+    - 172.30.104.0/22
+    - 172.30.108.0/22
+    - 172.30.112.0/22
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-gke-pods-in-allow
+  network: cloit-d-host-vpc
+  direction: INGRESS
+  priority: 1000
+  description: '[SEC-cloit-FW-Rule]  (기간 제한 없음) GKE Pods 통신 (Pod 대역) :신규 GKE 구성시  IP range/Network Tag 추가'
+  allow:
+    - tcp:
+    - udp:
+    - icmp:
+    - esp:
+    - ah:
+    - sctp:
+  targetTags:
+    - cloit-d-service-net-dive-gke
+    - cloit-d-data-net-analytics-cps
+    - cloit-d-net-gke-config
+    - cloit-d-net-gke-lcs
+  sourceRanges:
+    - 10.100.0.0/18
+    - 10.32.0.0/18
+    - 10.100.64.0/18
+    - 10.100.128.0/18
+    - 10.100.192.0/18
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-gmp-in-allow-8443
+  network: cloit-d-host-vpc
+  direction: INGRESS
+  priority: 1000
+  description: ' BDP-54362 managed prometheus 설치관련 에러 fix'
+  allow:
+    - tcp:
+      - 8443
+  targetTags:
+    - cloit-d-net-gke-lcs
+    - cloit-d-net-gke-config
+  sourceRanges:
+    - 172.16.31.0/28
+    - 172.16.20.0/28
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-googleapi-common-out-allow-443
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 10000
+  description: '[SEC-cloit-FW-Rule] (기간 제한 없음) VPC의 VM에서 Google Cloud API 호출을 위한 Egress IP 대역 허용'
+  allow:
+    - tcp:
+      - 443
+  destinationRanges:
+    - 199.36.153.8/30
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-in-allow-fs-loguploader
+  network: cloit-d-host-vpc
+  direction: INGRESS
+  priority: 1000
+  description: 'Filestore(loguploder) Ingress 허용  Control Plane 추가'
+  allow:
+    - tcp:
+      - 111
+      - 2046
+      - 4045
+  targetTags:
+    - cloit-d-net-gke-lcs
+    - cloit-d-net-ce-dev
+  sourceRanges:
+    - 10.240.1.8/29
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-in-allow-svc-health-checks
+  network: cloit-d-host-vpc
+  direction: INGRESS
+  priority: 1000
+  description: '[SEC-cloit-FW-Rule] (기간 제한 없음) GCP의 Serverless Connector 외부 통신 health-checks 방화벽'
+  allow:
+    - tcp:
+      - 667
+  targetTags:
+    - vpc-connector-asia-northeast3-cloit-d-data-vac-an3
+    - vpc-connector-asia-northeast3-cloit-d-data-vac-cf-an3
+  sourceRanges:
+    - 130.211.0.0/22
+    - 35.191.0.0/16
+    - 108.170.220.0/23
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-ingress-health-check-in-allow
+  network: cloit-d-host-vpc
+  direction: INGRESS
+  priority: 1000
+  description: '[SEC-cloit-FW-Rule]  (기간 제한 없음) GCP의 GKE 서비스에서 Ingress(Load Balancer) 사용 시 내부 Healthcheck가 Pod와 Ingress 통신이 가능하게 허용'
+  allow:
+    - tcp:
+      - 30000-32767
+      - 80
+  targetTags:
+    - cloit-d-net-gke-config
+  sourceRanges:
+    - 35.191.0.0/16
+    - 130.211.0.0/22
+    - 209.85.152.0/22
+    - 209.85.204.0/22
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-internal-common-out-allow
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 60000
+  description: '[SEC-cloit-FW-Rule] (기간 제한 없음) VPC의 VM 간 및 GCP 내부 서비스 VM 간 Internal 통신을 위한 Egress 트래픽 허용'
+  allow:
+    - tcp:
+      - 1-65535
+    - udp:
+      - 1-65535
+  destinationRanges:
+    - 10.0.0.0/8
+    - 172.16.0.0/12
+    - 192.168.0.0/16
+    - 224.0.0.252/32
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-ipa-1-out-allow
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 1000
+  description: 'IPA agnet install'
+  allow:
+    - tcp:
+      - 80
+      - 443
+      - 389
+      - 636
+      - 88
+      - 464
+    - udp:
+      - 88
+      - 464
+      - 123
+  targetTags:
+    - ipa
+  destinationRanges:
+    - 34.85.42.35/32
+    - 35.245.90.128/32
+    - 35.234.106.238/32
+
+# JIRA :
+# DESCRIPT : 11
+# 요청자 :
+- name: cloit-d-host-sec-ipa-2-out-allow
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 1000
+  description: 'IPA agnet install'
+  allow:
+    - tcp:
+      - 443
+  targetTags:
+    - ipa
+  destinationRanges:
+    - 35.190.24.74/32
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-ipa-3-out-allow
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 1000
+  description: 'IPA agnet install'
+  allow:
+    - tcp:
+      - 5044
+  targetTags:
+    - ipa
+  destinationRanges:
+    - 34.84.73.136/32
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-isbservice-out-allow-443
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 1000
+  description: '[SEC-cloit-FW-Rule] (기간 제한 없음) ingest 프로젝트 내 Instance에서 ISBService로의 Egress 통신 허용'
+  allow:
+    - tcp:
+      - 443
+  targetTags:
+    - cloit-d-net-ce-openapi
+    - cloit-d-net-ce-batch
+    - cloit-d-net-ce-dev
+    - cloit-d-net-gke-config
+    - cloit-d-net-gke-lcs
+  destinationRanges:
+    - 10.40.202.52/32
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-jenkins-in-allow-7979
+  network: cloit-d-host-vpc
+  direction: INGRESS
+  priority: 1000
+  description: '[SEC-cloit-FW-Rule] (기간 제한 없음) 수원사업장(210.94.41.89/32), SBC, Bespin Project Room(58.151.93.21/32)에서 Jenkins 웹콘솔 통신 허용'
+  allow:
+    - tcp:
+      - 7979
+      - 8080
+  targetTags:
+    - cloit-d-net-ce-jenkins
+  sourceRanges:
+    - 210.94.41.89/32
+    - 203.244.212.0/24
+    - 203.244.197.0/24
+    - 211.189.57.60/32
+    - 58.151.93.21/32 # Bespin labs
+    - 165.225.116.0/23
+    - 165.225.234.0/23
+    - 165.225.112.0/23
+    - 165.225.230.0/23
+    - 210.118.108.252/32
+    - 210.118.108.253/32
+    - 210.118.108.254/32
+    - 203.126.64.67/32
+    - 203.126.64.68/32
+    - 203.126.64.69/32
+    - 203.126.64.70/32
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-lb-health-check-in-allow
+  network: cloit-d-host-vpc
+  direction: INGRESS
+  priority: 1000
+  description: '[SEC-cloit-FW-Rule]  (기간 제한 없음) Instance Group 에서 Load Balancer 사용 시 내부 Healthcheck가 Instance와 통신이 가능하게 허용'
+  allow:
+    - tcp:
+      - 30000-32767
+      - 8080
+      - 3000
+      - 80
+      - 79
+      - 8088
+  sourceRanges:
+    - 35.191.0.0/16
+    - 130.211.0.0/22
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-myip-out-allow-443
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 1000
+  description: '[BDP-53562] Cloud Run to MyIP 테스트 '
+  allow:
+    - tcp:
+      - 443
+      - 80
+  targetTags:
+    - vpc-connector-asia-northeast3-cloit-d-data-vac-an3
+  destinationRanges:
+    - 172.67.193.202/32
+    - 104.21.82.34/32
+    - 3.39.102.2/32
+    - 52.51.214.111/32
+    - 54.217.88.217/32
+    - 176.34.221.38/32
+    - 52.41.193.5/32
+    - 44.226.117.157/32
+    - 13.215.17.47/32
+    - 52.220.214.155/32
+    - 13.125.122.136/32
+    - 3.34.65.25/32
+    - 71.131.251.112/32
+    - 52.80.75.184/32
+    - 52.219.148.50/32
+    - 3.5.140.0/22
+    - 52.219.60.0/23
+    - 52.219.204.0/22
+    - 52.219.148.0/23
+    - 52.219.202.0/23
+    - 3.5.144.0/23
+    - 52.219.56.0/22
+    - 52.219.144.0/22
+    - 3.36.167.64/28
+    - 3.36.167.80/28
+    - 3.39.136.117/32
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-niffler-out-allow-3333
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 1000
+  description: 'Niffler 설치를 위한 외부 Repo 접근 방화벽 오픈'
+  allow:
+    - tcp:
+      - 3333
+      - 80
+      - 443
+  targetTags:
+    - niffler
+  destinationRanges:
+    - 103.216.193.35/32
+    - 103.216.195.35/32
+    - 45.248.45.35/32
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-openapi-in-allow-20022
+  network: cloit-d-host-vpc
+  direction: INGRESS
+  priority: 1000
+  description: 'jenkins to openapi 배포를 위한 포트 오픈'
+  allow:
+    - tcp:
+      - 20022
+  targetTags:
+    - cloit-d-net-ce-openapi
+    - cloit-d-net-ce-loguploader
+    - ipa
+  sourceTags:
+    - cloit-d-net-ce-jenkins
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-openapi-out-allow
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 1000
+  description: 'BDP OpenAPI 를 사용 (이상감지 시, email 발송 기능을 사용하기 위함)'
+  allow:
+    - tcp:
+      - 443
+  targetTags:
+    - cloit-d-data-net-analytics-cps
+  destinationRanges:
+    - 34.117.47.210/32
+    - 0.0.0.0/0
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-openapi-out-allow-443
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 1000
+  description: 'BDP-55235, BDP-69339, BDP-86354, BDP-90695, BDP-94011 : Dive에서 open API 호출을 위한 방화벽'
+  allow:
+    - tcp:
+      - 443
+      - 80
+  targetTags:
+    - cloit-d-service-net-dive-gke
+  destinationRanges:
+    - 140.179.170.120/32
+    - 71.132.0.133/32
+    - 34.149.36.201/32
+    - 34.149.154.168/32
+    - 52.49.214.48/32
+    - 63.32.198.153/32
+    - 34.107.153.214
+    - 34.111.98.7
+    - 34.117.47.210/32
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-out-allow-dkms
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 1000
+  description: '[SEC-VDKIP-FW-Rule] (기간 제한 없음) - 목적 : Dive에서 DKMS 호출을 위한 방화벽(BDP-111175) - 요청자 : Christian Daduros Arcano'
+  allow:
+    - tcp:
+      - 443
+  targetTags:
+    - cloit-d-service-net-dive-gke
+  destinationRanges:
+    - 13.248.168.173/32
+    - 76.223.43.232/32
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-out-allow-fs-loguploader
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 1000
+  description: 'Filestore(loguploader) 외부통신 허용 172.16.20.0/28 Control Plane 추가'
+  allow:
+    - tcp:
+      - 111
+      - 2046
+      - 2049
+      - 2050
+      - 4045
+  targetTags:
+    - cloit-d-net-gke-lcs
+    - cloit-d-net-ce-dev
+  destinationRanges:
+    - 10.240.1.8/29
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-out-allow-smtp-lcs
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 1000
+  description: 'LCS GKE to use AWS SES smtp port'
+  allow:
+    - tcp:
+      - 587
+      - 25
+  targetTags:
+    - cloit-d-net-gke-lcs
+    - cloit-d-net-ce-smtp
+    - cloit-d-net-gke-config
+  destinationRanges:
+    - 0.0.0.0/0
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-prometheus-in-allow
+  network: cloit-d-host-vpc
+  direction: INGRESS
+  priority: 1000
+  description: '- jira : BDP-121511 - 요청자 : Briones - Data : 230802'
+  allow:
+    - tcp:
+      - 3000
+      - 9090
+  targetTags:
+    - cloit-d-net-ce-monitoring
+  sourceRanges:
+    - 203.126.64.67/32
+    - 203.126.64.68/32
+    - 203.126.64.69/32
+    - 203.126.64.70/32
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-s3-cps-out-allow
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 1000
+  description: 'BDP-53420 컴포저에서 AWS S3 접근 관련 작업 요청'
+  allow:
+    - tcp:
+  targetTags:
+    - cloit-d-data-net-analytics-cps
+  destinationRanges:
+    - 18.34.32.0/20
+    - 3.5.72.0/23
+    - 52.218.0.0/17
+    - 3.5.64.0/21
+    - 52.92.0.0/17
+    - 18.34.240.0/22
+    - 3.251.110.208/28
+    - 3.251.110.224/28
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-s3-gcs-transfer-out-allow
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 1000
+  description: 'AWS <-> GCP(STS) 간의 통신(storage transfer api)을 위한 방화벽'
+  allow:
+    - all:
+  targetTags:
+    - cloit-d-net-ce-common
+    - cloit-d-data-net-analytics-cps
+    - cloit-d-net-ce-db-cli
+  destinationRanges:
+    - 74.125.38.0/24
+    - 142.250.216.0/24
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-vac-connector-in-allow
+  network: cloit-d-host-vpc
+  direction: INGRESS
+  priority: 1000
+  description: '[SEC-cloit-FW-Rule]  (기간 제한 없음) GCP의 Serverless Connector NAT'
+  allow:
+    - tcp:
+      - 667
+    - udp:
+      - 665-666
+    - icmp:
+  targetTags:
+    - vpc-connector-asia-northeast3-cloit-d-data-vac-an3
+    - vpc-connector-asia-northeast3-cloit-d-data-vac-cf-an3
+  sourceRanges:
+    - 107.178.230.64/26
+    - 35.199.224.0/19
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-host-sec-vac-connector-out-allow
+  network: cloit-d-host-vpc
+  direction: EGRESS
+  priority: 1000
+  description: '[SEC-cloit-FW-Rule] (기간 제한 없음) GCP의 Serverless Connector NAT'
+  allow:
+    - tcp:
+      - 667
+    - udp:
+      - 665-666
+    - icmp:
+  targetTags:
+    - vpc-connector-asia-northeast3-cloit-d-data-vac-cf-an3
+  destinationRanges:
+    - 107.178.230.64/26
+    - 35.199.224.0/19
+
+# JIRA :
+# DESCRIPT :
+- name: cloit-d-ingest-lb-openapi-test
+  network: cloit-d-host-vpc
+  direction: INGRESS
+  priority: 1000
+  description: ''
+  allow:
+    - tcp:
+      - 80
+  targetTags:
+    - cloit-d-net-ce-openapi
+  sourceRanges:
+    - 58.151.93.21/32 # Bespin labs
+    - 210.94.41.89/32
+

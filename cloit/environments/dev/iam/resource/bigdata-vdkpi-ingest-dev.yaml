@@ -1,0 +1,12 @@
+- members: group:cloit-gr-dev-ingest@cloit.com
+  role:
+    - roles/appengine.deployer
+    - roles/artifactregistry.writer
+    - roles/cloudbuild.builds.editor
+    - roles/cloudfunctions.developer
+    - roles/cloudsql.client
+    - roles/cloudtrace.user
+    - roles/container.developer
+    - roles/monitoring.editor
+    - roles/pubsub.editor
+    - roles/storage.objectAdmin

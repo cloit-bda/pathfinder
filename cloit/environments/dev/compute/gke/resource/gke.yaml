@@ -1,0 +1,260 @@
+---
+# 통합 리소스 목록
+# Project name	Cluster name
+# cluster name : name
+# region
+# master version
+# control plane address range
+# subnet
+# status
+# autoscaling
+# control plane global access
+# node pools name
+# node size
+# image type
+# machine type
+# boot disk type
+# boot disk(GB)
+# networks tags
+# control plane authorized networks
+# service account
+# labels
+# kubernetes labels
+# workload identity
+# maintenance window
+name: cloit-d-ingest-gke-config
+clusterIpv4Cidr: 10.100.128.0/18
+ipAllocationPolicy:
+  clusterIpv4Cidr: 10.100.128.0/18
+  clusterIpv4CidrBlock: 10.100.128.0/18
+  clusterSecondaryRangeName: config-pod
+  servicesIpv4Cidr: 10.1.32.0/20
+  servicesIpv4CidrBlock: 10.1.32.0/20
+  servicesSecondaryRangeName: config-service
+location: asia-northeast3
+network: cloit-d-host-vpc
+networkConfig:
+  network: projects/cloit-host-dev/global/networks/cloit-d-host-vpc
+nodeConfig:
+  diskSizeGb: 160
+  diskType: pd-standard
+  imageType: COS_CONTAINERD
+  machineType: n2-standard-2
+  serviceAccount: cloit-d-ingest-gsa-config-gke@cloit-ingest-dev.iam.gserviceaccount.com
+  tags:
+  - cloit-d-net-gke-config
+nodePools:
+- autoscaling: {}
+  config:
+    diskSizeGb: 160
+    diskType: pd-standard
+    imageType: COS_CONTAINERD
+    machineType: n2-standard-2
+    serviceAccount: cloit-d-ingest-gsa-config-gke@cloit-ingest-dev.iam.gserviceaccount.com
+    tags:
+    - cloit-d-net-gke-config
+  name: config-service-pool
+- autoscaling: {}
+  config:
+    diskSizeGb: 160
+    diskType: pd-standard
+    imageType: COS_CONTAINERD
+    machineType: n2-standard-2
+    serviceAccount: cloit-d-ingest-gsa-config-gke@cloit-ingest-dev.iam.gserviceaccount.com
+    tags:
+    - cloit-d-net-gke-config
+    windowsNodeConfig: {}
+  name: config-batch-pool
+  version: 1.24.14-gke.1200
+- autoscaling: {}
+  config:
+    diskSizeGb: 100
+    diskType: pd-standard
+    imageType: UBUNTU_CONTAINERD
+    labels:
+      agent: dsa
+    machineType: e2-medium
+    serviceAccount: cloit-d-ingest-gsa-config-gke@cloit-ingest-dev.iam.gserviceaccount.com
+    tags:
+    - cloit-d-net-gke-config
+  name: agent-pool
+  networkConfig:
+    podIpv4CidrBlock: 10.100.128.0/18
+    podRange: config-pod
+  podIpv4CidrSize: 24
+privateClusterConfig:
+  enablePrivateNodes: true
+  masterIpv4CidrBlock: 172.16.31.0/28
+  peeringName: gke-nc3d513a66e295065508-c7cc-da42-peer
+  privateEndpoint: 172.16.31.2
+  publicEndpoint: 34.64.79.188
+releaseChannel:
+  channel: STABLE
+resourceLabels:
+  component: kpi
+  name: cloit-d-ingest-gke-config
+  owner: junha01_hwang
+  sec_assets_gateway: n
+  sec_assets_pii: n
+  service: vdkpi
+  stage: dev
+securityPostureConfig:
+  mode: MODE_UNSPECIFIED
+  vulnerabilityMode: VULNERABILITY_MODE_UNSPECIFIED
+selfLink: https://container.googleapis.com/v1/projects/cloit-ingest-dev/locations/asia-northeast3/clusters/cloit-d-ingest-gke-config
+servicesIpv4Cidr: 10.1.32.0/20
+subnetwork: cloit-d-sub-ingest-gke-config-an3
+zone: asia-northeast3
+---
+# JIRA NUMBER :
+# 요청자 :
+# DESCRIPTION :
+name: cloit-d-ingest-gke-lcs
+ipAllocationPolicy:
+  clusterIpv4Cidr: 10.100.192.0/18
+  clusterIpv4CidrBlock: 10.100.192.0/18
+  clusterSecondaryRangeName: lcs-pod
+  servicesIpv4Cidr: 10.1.48.0/20
+  servicesIpv4CidrBlock: 10.1.48.0/20
+  servicesSecondaryRangeName: lcs-service
+location: asia-northeast3
+masterAuthorizedNetworksConfig:
+  cidrBlocks:
+  - cidrBlock: 172.30.0.100/32
+    displayName: ingest-cli
+  - cidrBlock: 172.30.0.79/32
+    displayName: jenkins
+  - cidrBlock: 172.30.0.208/32
+    displayName: ingest-dev
+  enabled: true
+network: cloit-d-host-vpc
+networkConfig:
+  network: projects/cloit-host-dev/global/networks/cloit-d-host-vpc
+nodeConfig:
+  diskSizeGb: 100
+  diskType: pd-standard
+  imageType: COS_CONTAINERD
+  labels:
+    pool: logcollector
+  machineType: n2-custom-4-4096
+  serviceAccount: cloit-d-ingest-gsa-lcs-gke@cloit-ingest-dev.iam.gserviceaccount.com
+  shieldedInstanceConfig:
+    enableIntegrityMonitoring: true
+  tags:
+  - cloit-d-net-gke-lcs
+  windowsNodeConfig: {}
+nodePools:
+- autoscaling:
+    enabled: true
+    locationPolicy: BALANCED
+    maxNodeCount: 10
+    minNodeCount: 1
+  config:
+    diskSizeGb: 100
+    diskType: pd-standard
+    imageType: COS_CONTAINERD
+    labels:
+      pool: logcollector
+    machineType: n2-custom-4-4096
+    metadata:
+      disable-legacy-endpoints: 'true'
+    oauthScopes:
+    - https://www.googleapis.com/auth/cloud-platform
+    serviceAccount: cloit-d-ingest-gsa-lcs-gke@cloit-ingest-dev.iam.gserviceaccount.com
+    shieldedInstanceConfig:
+      enableIntegrityMonitoring: true
+    tags:
+    - cloit-d-net-gke-lcs
+  name: lcs-logcollector-pool
+  networkConfig:
+    podIpv4CidrBlock: 10.100.192.0/18
+    podRange: lcs-pod
+  upgradeSettings:
+    maxSurge: 1
+    strategy: SURGE
+  version: 1.25.10-gke.2700
+notificationConfig:
+  pubsub: {}
+privateClusterConfig:
+  enablePrivateNodes: true
+  masterIpv4CidrBlock: 172.16.20.0/28
+  privateEndpoint: 172.16.20.2
+  publicEndpoint: 34.64.102.30
+resourceLabels:
+  component: kpi
+  name: cloit-d-ingest-gke-lcs
+  owner: junha01_hwang
+  sec_assets_gateway: n
+  sec_assets_pii: n
+  service: vdkpi
+  stage: dev
+securityPostureConfig:
+  mode: MODE_UNSPECIFIED
+  vulnerabilityMode: VULNERABILITY_MODE_UNSPECIFIED
+selfLink: https://container.googleapis.com/v1/projects/cloit-ingest-dev/locations/asia-northeast3/clusters/cloit-d-ingest-gke-lcs
+servicesIpv4Cidr: 10.1.48.0/20
+subnetwork: cloit-d-sub-ingest-gke-lcs-an3
+workloadIdentityConfig:
+  workloadPool: cloit-ingest-dev.svc.id.goog
+zone: asia-northeast3
+---
+name: cloit-d-service-dive-gke-an3-001
+clusterIpv4Cidr: 10.100.0.0/18
+ipAllocationPolicy:
+  clusterIpv4Cidr: 10.100.0.0/18
+  clusterIpv4CidrBlock: 10.100.0.0/18
+  clusterSecondaryRangeName: dive-pod
+  defaultPodIpv4RangeUtilization: 0.0313
+  servicesIpv4Cidr: 10.1.0.0/20
+  servicesIpv4CidrBlock: 10.1.0.0/20
+  servicesSecondaryRangeName: dive-service
+location: asia-northeast3
+masterAuthorizedNetworksConfig:
+  cidrBlocks:
+  - cidrBlock: 172.30.0.100/32
+    displayName: cli
+  - cidrBlock: 172.30.0.79/32
+    displayName: jenkins
+  enabled: true
+network: cloit-d-host-vpc
+networkConfig:
+  network: projects/cloit-host-dev/global/networks/cloit-d-host-vpc
+nodeConfig:
+  diskSizeGb: 100
+  diskType: pd-standard
+  imageType: COS_CONTAINERD
+  machineType: n1-standard-4
+  serviceAccount: cloit-d-service-gsa-dive-gke@cloit-service-dev.iam.gserviceaccount.com
+  tags:
+  - cloit-d-service-net-dive-gke
+nodePools:
+- config:
+    diskSizeGb: 100
+    diskType: pd-standard
+    imageType: COS_CONTAINERD
+    machineType: n1-standard-4
+    serviceAccount: cloit-d-service-gsa-dive-gke@cloit-service-dev.iam.gserviceaccount.com
+    tags:
+    - cloit-d-service-net-dive-gke
+  name: default-pool
+  networkConfig:
+    podIpv4CidrBlock: 10.100.0.0/18
+    podRange: dive-pod
+privateClusterConfig:
+  masterIpv4CidrBlock: 172.16.30.0/28
+  privateEndpoint: 172.16.30.2
+  publicEndpoint: 34.64.126.13
+resourceLabels:
+  component: kpi
+  name: cloit-d-service-dive-gke-an3-001
+  owner: junha01_hwang
+  sec_assets_gateway: n
+  sec_assets_pii: n
+  service: vdkpi
+  stage: dev
+selfLink: https://container.googleapis.com/v1/projects/cloit-service-dev/locations/asia-northeast3/clusters/cloit-d-service-dive-gke-an3-001
+servicesIpv4Cidr: 10.1.0.0/20
+subnetwork: cloit-d-sub-service-gke-dive-an3
+workloadIdentityConfig:
+  workloadPool: cloit-service-dev.svc.id.goog
+zone: asia-northeast3

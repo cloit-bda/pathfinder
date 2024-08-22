@@ -1,0 +1,41 @@
+---
+# JIRA Number : [여기에 JIRA 번호를 적어주세요]
+# Description: [작업에 대한 간단한 설명을 적어주세요]
+# 요청자 : [요청자의 이름을 적어주세요]
+
+# PROJECT ID
+# Region
+# Multi-AZ
+# INSTANCE
+# NAME
+# STATUS
+# Private IP
+# Public IP
+# Class (spce, mahin tpye)
+# Storage
+# Engine (Version)
+# Port
+# DB Name
+# Master User
+# Label	Auto Backup
+# Backup Window
+# Maintenance Window
+databaseVersion: MYSQL_8_0_26
+gceZone: asia-northeast3-b
+name: cloit-d-service-sql-dive-an3
+project: cloit-service-dev
+region: asia-northeast3
+settings:
+  maintenanceWindow:
+    day: 4
+    hour: 1
+  tier: db-custom-2-7680
+  userLabels:
+    component: kpi
+    name: cloit-d-service-sql-dive-an3
+    owner: junha01_hwang
+    sec_assets_gateway: n
+    sec_assets_pii: n
+    service: vdkpi
+    stage: dev
+

@@ -1,0 +1,11 @@
+project_id: "cloit-host-dev"
+service_projects:
+  - name: "cloit-ingest-dev"
+  - name: "cloit-service-dev"
+  - name: "cloit-data-dev"
+
+shared_vpc_projects:
+  cloit-ingest-dev: {}
+  cloit-service-dev: {}
+  cloit-data-dev: {}
+

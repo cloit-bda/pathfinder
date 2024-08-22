@@ -1,0 +1,5 @@
+- members: group:cloit-gr-dev-ingest@cloit.com
+  role:
+    - projects/cloit-host-dev/roles/Billing.CostViewer
+    - projects/cloit-host-dev/roles/FirewallCRU
+    - roles/viewer

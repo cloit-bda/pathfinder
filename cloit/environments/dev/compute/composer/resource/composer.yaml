@@ -1,0 +1,108 @@
+---
+config:
+  environmentName: cloit-d-data-cps-analytics-an3-001
+  projectId: cloit-data-dev
+  hostProjectId: cloit-host-dev
+  environmentSize: ENVIRONMENT_SIZE_LARGE
+  nodeConfig:
+    ipAllocationPolicy:
+      clusterSecondaryRangeName: composer-pod
+      servicesSecondaryRangeName: composer-service
+    network: projects/cloit-host-dev/global/networks/cloit-d-host-vpc
+    serviceAccount: cloit-d-data-gsa-cps-001@cloit-data-dev.iam.gserviceaccount.com
+    subnetwork: projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-data-analytics-an3
+    tags:
+    - cloit-d-data-net-analytics-cps
+  privateEnvironmentConfig:
+    cloudComposerNetworkIpv4CidrBlock: 111.39.241.0/24
+    cloudComposerNetworkIpv4ReservedRange: 111.39.241.8/29
+    cloudSqlIpv4CidrBlock: 10.16.0.0/12
+    enablePrivateEnvironment: true
+    networkingConfig:
+      connectionType: VPC_PEERING
+    privateClusterConfig:
+      enablePrivateEndpoint: true
+      masterIpv4CidrBlock: 172.16.31.48/28
+      masterIpv4ReservedRange: 172.16.31.48/28
+  softwareConfig:
+    imageVersion: composer-2.2.1-airflow-2.5.1
+    pypiPackages:
+      apache-airflow-providers-amazon: ==3.3.0
+      apache-airflow-providers-slack: ==4.2.3
+      boto3: ==1.22.0
+      matplotlib: ==3.5.2
+      pandas: ==1.3.0
+      requests-toolbelt: ==0.9.1
+  workloadsConfig:
+    scheduler:
+      count: 3
+      cpu: 4.0
+      memoryGb: 15.0
+      storageGb: 10.0
+    webServer:
+      cpu: 2.0
+      memoryGb: 7.5
+      storageGb: 10.0
+    worker:
+      cpu: 4.0
+      maxCount: 12
+      memoryGb: 15.0
+      minCount: 8
+      storageGb: 10.0
+---
+config:
+  environmentName: cloit-d-data-cps-cn-demo-001
+  projectId: cloit-data-dev
+  hostProjectId: cloit-host-dev
+  environmentSize: ENVIRONMENT_SIZE_SMALL
+  nodeConfig:
+    ipAllocationPolicy:
+      clusterSecondaryRangeName: composer-pod
+      servicesSecondaryRangeName: composer-service
+    network: projects/cloit-host-dev/global/networks/cloit-d-host-vpc
+    serviceAccount: cloit-d-data-gsa-cps-001@cloit-data-dev.iam.gserviceaccount.com
+    subnetwork: projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-data-analytics-an3
+    tags:
+    - cloit-d-data-net-analytics-cps
+  privateEnvironmentConfig:
+    cloudComposerNetworkIpv4CidrBlock: 172.16.31.64/27
+    cloudComposerNetworkIpv4ReservedRange: 172.16.31.64/29
+    cloudSqlIpv4CidrBlock: 172.16.0.0/23
+    enablePrivateEnvironment: true
+    networkingConfig:
+      connectionType: VPC_PEERING
+    privateClusterConfig:
+      enablePrivateEndpoint: true
+      masterIpv4CidrBlock: 172.16.31.32/28
+      masterIpv4ReservedRange: 172.16.31.32/28
+  recoveryConfig:
+    scheduledSnapshotsConfig: {}
+  softwareConfig:
+    imageVersion: composer-2.2.1-airflow-2.5.1
+    pypiPackages:
+      apache-airflow-providers-amazon: ==3.3.0
+      apache-airflow-providers-slack: ==4.2.3
+      boto3: ==1.22.0
+      matplotlib: ==3.5.2
+      pandas: ==1.3.0
+      requests-toolbelt: ==0.9.1
+  workloadsConfig:
+    scheduler:
+      count: 1
+      cpu: 0.5
+      memoryGb: 1.875
+      storageGb: 1.0
+    webServer:
+      cpu: 0.5
+      memoryGb: 1.875
+      storageGb: 1.0
+    worker:
+      cpu: 0.5
+      maxCount: 3
+      memoryGb: 1.875
+      minCount: 1
+      storageGb: 1.0
+
+
+
+###

@@ -1,0 +1,7 @@
+# JIRA : BDP-132397
+# DESCRIPT : Conversion of DIVE Service Accounts to Keyless
+# 요청자  : Christian Daduros Arcano
+- members: group:cloit-gr-dev-srph@cloit.com
+  role:
+    - roles/iam.serviceAccountTokenCreator
+

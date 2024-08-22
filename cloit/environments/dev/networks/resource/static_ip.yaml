@@ -1,0 +1,15 @@
+project_id: cloit-host-dev
+region: asia-northeast3
+ips:
+  - name: cloit-d-host-eip-nat-an3
+    description: "NAT 사용 고정 아이피"
+  # - cloit-d-host-eip-nat-an3
+peerings:
+  - local_network: local-vpc-network-name1
+    target_project_id: target-project-id1
+    target_network: target-vpc-network-name1
+    peering_name: peering-name1
+  - local_network: local-vpc-network-name2
+    target_project_id: target-project-id2
+    target_network: target-vpc-network-name2
+    peering_name: peering-name2

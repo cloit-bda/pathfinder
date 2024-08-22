@@ -1,0 +1,169 @@
+---
+# JIRA Number : [여기에 JIRA 번호를 적어주세요]
+# Description: [작업에 대한 간단한 설명을 적어주세요]
+# 요청자 : [요청자의 이름을 적어주세요]   !!!
+deletionProtection: true
+disks:
+- autoDelete: true
+  boot: true
+  deviceName: cloit-d-service-ce-jenkins-an3a-001
+  mode: READ_WRITE
+  source: https://www.googleapis.com/compute/v1/projects/cloit-service-dev/zones/asia-northeast3-a/disks/cloit-d-service-ce-jenkins-an3a-001
+labels:
+  component: kpi
+  name: cloit-d-service-ce-jenkins-an3a-001
+  owner: junha01_hwang
+  sec_asset_pii: "n"
+  sec_assets_gateway: "n"
+  service: vdkpi
+  stage: dev
+machineType: n1-standard-4
+metadata:
+  items:
+  - key: IPA_TAGS
+    value: system
+  - key: block-project-ssh-keys
+    value: 'true'
+name: cloit-d-service-ce-jenkins-an3a-001
+networkInterfaces:
+- accessConfigs:
+  - natIP: 34.64.56.180
+    networkTier: PREMIUM
+  network: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/global/networks/cloit-d-host-vpc
+  networkIP: 172.30.0.79
+  stackType: IPV4_ONLY
+  subnetwork: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-system-an3
+scheduling:
+  automaticRestart: true
+  onHostMaintenance: MIGRATE
+  provisioningModel: STANDARD
+serviceAccounts:
+- email: cloit-d-service-gsa-jenkins@cloit-service-dev.iam.gserviceaccount.com
+  scopes:
+  - https://www.googleapis.com/auth/cloud-platform
+shieldedInstanceConfig:
+  enableIntegrityMonitoring: true
+  enableSecureBoot: false
+  enableVtpm: true
+tags:
+  items:
+  - ipa
+  - niffler
+  - cloit-d-net-ce-common
+  - cloit-d-net-ce-jenkins
+zone: https://www.googleapis.com/compute/v1/projects/cloit-service-dev/zones/asia-northeast3-a
+
+---
+# JIRA Number : [여기에 JIRA 번호를 적어주세요]
+# Description: [작업에 대한 간단한 설명을 적어주세요]
+# 요청자 : [요청자의 이름을 적어주세요]
+
+deletionProtection: true
+disks:
+- autoDelete: true
+  boot: true
+  deviceName: cloit-d-service-ce-prometheus-poc-an3a-001
+  mode: READ_WRITE
+  source: https://www.googleapis.com/compute/v1/projects/cloit-service-dev/zones/asia-northeast3-a/disks/cloit-d-service-ce-prometheus-poc-an3a-001
+labels:
+  component: kpi
+  name: cloit-d-service-ce-prometheus-poc-an3a-001
+  owner: e_discaya
+  sec_asset_pii: "n"
+  sec_assets_gateway: "n"
+  service: vdkpi
+  stage: dev
+machineType: n2-standard-2
+metadata:
+  items:
+  - key: IPA_TAGS
+    value: service
+  - key: startup-script
+    value: '#! /bin/bash
+
+      sed -i ''s/#Port 22/Port 20022/g'' /etc/ssh/sshd_config
+
+      sed -i ''s/#PasswordAuthentication yes/PasswordAuthentication no/g'' /etc/ssh/sshd_config
+
+      service sshd restart'
+name: cloit-d-service-ce-prometheus-poc-an3a-001
+networkInterfaces:
+- accessConfigs:
+  - natIP: 34.64.107.82
+    networkTier: PREMIUM
+  network: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/global/networks/cloit-d-host-vpc
+  networkIP: 172.30.0.150
+  subnetwork: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-ce-an3
+scheduling:
+  automaticRestart: true
+  onHostMaintenance: MIGRATE
+  provisioningModel: STANDARD
+serviceAccounts:
+- email: cloit-d-service-ce-monitoring@cloit-service-dev.iam.gserviceaccount.com
+  scopes:
+  - https://www.googleapis.com/auth/cloud-platform
+shieldedInstanceConfig:
+  enableIntegrityMonitoring: true
+  enableSecureBoot: false
+  enableVtpm: true
+tags:
+  items:
+  - ipa
+  - cloit-d-net-ce-monitoring
+zone: https://www.googleapis.com/compute/v1/projects/cloit-service-dev/zones/asia-northeast3-a
+
+---
+# JIRA Number : [여기에 JIRA 번호를 적어주세요]
+# Description: [작업에 대한 간단한 설명을 적어주세요]
+# 요청자 : [요청자의 이름을 적어주세요]
+
+deletionProtection: true
+disks:
+- autoDelete: true
+  boot: true
+  deviceName: cloit-d-service-ce-niffler-poc-an3c-001
+  mode: READ_WRITE
+  source: https://www.googleapis.com/compute/v1/projects/cloit-service-dev/zones/asia-northeast3-c/disks/cloit-d-service-ce-niffler-poc-an3c-001
+labels:
+  component: kpi
+  name: cloit-d-service-ce-niffler-poc-an3c-001
+  owner: e_discaya
+  sec_asset_pii: "n"
+  sec_assets_gateway: "n"
+  service: vdkpi
+  stage: dev
+machineType: n2-standard-2
+metadata:
+  items:
+  - key: IPA_TAGS
+    value: service
+  - key: startup-script
+    value: '#! /bin/bash
+
+      sed -i ''s/#Port 22/Port 20022/g'' /etc/ssh/sshd_config
+
+      sed -i ''s/#PasswordAuthentication yes/PasswordAuthentication no/g'' /etc/ssh/sshd_config
+
+      service sshd restart'
+name: cloit-d-service-ce-niffler-poc-an3c-001
+networkInterfaces:
+- network: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/global/networks/cloit-d-host-vpc
+  networkIP: 172.30.0.151
+  subnetwork: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-ce-an3
+scheduling:
+  automaticRestart: true
+  onHostMaintenance: MIGRATE
+  provisioningModel: STANDARD
+serviceAccounts:
+- email: cloit-d-service-ce-monitoring@cloit-service-dev.iam.gserviceaccount.com
+  scopes:
+  - https://www.googleapis.com/auth/cloud-platform
+shieldedInstanceConfig:
+  enableIntegrityMonitoring: true
+  enableSecureBoot: false
+  enableVtpm: true
+tags:
+  items:
+  - ipa
+  - cloit-d-net-ce-monitoring
+zone: https://www.googleapis.com/compute/v1/projects/cloit-service-dev/zones/asia-northeast3-c

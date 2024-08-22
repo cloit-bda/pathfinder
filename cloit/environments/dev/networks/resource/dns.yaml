@@ -1,0 +1,171 @@
+# DNS
+# JIRA NUMBER
+managed_zones:
+  - name: cloit-d-host-dns-appengine
+    dns_name: appengine.google.com.
+    visibility: private
+    description: ""
+    record_sets:
+      - name: appengine.google.com.
+        rrdata:
+        - 199.36.153.8
+        - 199.36.153.9
+        - 199.36.153.10
+        - 199.36.153.11
+        ttl: '300'
+        type: A
+
+  - name: cloit-d-host-dns-appspot
+    dns_name: appspot.com.
+    visibility: private
+    description: ""
+    record_sets:
+      - name: appspot.com.
+        rrdata:
+        - 199.36.153.8
+        - 199.36.153.9
+        - 199.36.153.10
+        - 199.36.153.11
+        ttl: '300'
+        type: A
+      - name: '*.appspot.com.'
+        rrdata: '*.appspot.com.'
+        ttl: '300'
+        type: CNAME
+
+  - name: cloit-d-host-dns-gcr
+    dns_name: gcr.io.
+    visibility: private
+    description: ""
+    record_sets:
+      - name: gcr.io.
+        rrdata:
+        - 199.36.153.8
+        - 199.36.153.9
+        - 199.36.153.10
+        - 199.36.153.11
+        ttl: '300'
+        type: A
+      - name: '*.gcr.io.'
+        rrdata: gcr.io.
+        ttl: '300'
+        type: CNAME
+
+  - name: cloit-d-host-dns-googleapis
+    dns_name: googleapis.com.
+    visibility: private
+    description: ""
+    record_sets:
+      - name: '*.googleapis.com.'
+        rrdata: private.googleapis.com.
+        ttl: '300'
+        type: CNAME
+      - name: private.googleapis.com.
+        rrdata:
+        - 199.36.153.8
+        - 199.36.153.9
+        - 199.36.153.10
+        - 199.36.153.11
+        ttl: '300'
+        type: A
+
+  - name: cloit-d-host-dns-googleusercontent
+    dns_name: notebooks.googleusercontent.com.
+    visibility: private
+    description: "Note books API"
+    record_sets:
+      - name: notebooks.googleusercontent.com.
+        rrdata:
+          - 199.36.153.8
+          - 199.36.153.9
+          - 199.36.153.10
+          - 199.36.153.11
+        ttl: '300'
+        type: A
+      - name: '*.notebooks.googleusercontent.com.'
+        rrdata: notebooks.googleusercontent.com.
+        ttl: '300'
+        type: CNAME
+
+  - name: cloit-d-host-dns-notebooks
+    dns_name: notebooks.googleapis.com.
+    visibility: private
+    description: "Note books API"
+    record_sets:
+      - name: notebooks.googleapis.com.
+        rrdata:
+        - 199.36.153.8
+        - 199.36.153.9
+        - 199.36.153.10
+        - 199.36.153.11
+        ttl: '300'
+        type: A
+      - name: '*.notebooks.googleapis.com.'
+        rrdata: notebooks.googleapis.com.
+        ttl: '300'
+        type: CNAME
+
+  - name: cloit-d-host-dns-notebooks-cloud
+    dns_name: notebooks.cloud.google.com.
+    visibility: private
+    description: "Note books API"
+    record_sets:
+      - name: notebooks.cloud.google.com.
+        rrdata:
+          - 199.36.153.8
+          - 199.36.153.9
+          - 199.36.153.10
+          - 199.36.153.11
+        ttl: '300'
+        type: A
+      - name: '*.notebooks.cloud.google.com.'
+        rrdata: notebooks.cloud.google.com.
+        ttl: '300'
+        type: CNAME
+
+  - name: cloit-d-host-dns-packages
+    dns_name: packages.cloud.google.com.
+    visibility: private
+    description: ""
+    record_sets:
+      - name: packages.cloud.google.com.
+        rrdata:
+        - 199.36.153.8
+        - 199.36.153.9
+        - 199.36.153.10
+        - 199.36.153.11
+        ttl: '300'
+        type: A
+
+  - name: cloit-d-host-dns-pkg-dev
+    dns_name: pkg.dev.
+    visibility: private
+    description: ""
+    record_sets:
+      - name: pkg.dev.
+        rrdata:
+        - 199.36.153.8
+        - 199.36.153.9
+        - 199.36.153.10
+        - 199.36.153.11
+        ttl: '300'
+        type: A
+      - name: '*.pkg.dev.'
+        rrdata: pkg.dev.
+        ttl: '300'
+        type: CNAME
+
+  - name: cloit-d-host-dns-source-developers
+    dns_name: source.developers.google.com.
+    visibility: private
+    description: ""
+    record_sets:
+      - name: source.developers.google.com.
+        rrdata:
+        - 199.36.153.8
+        - 199.36.153.9
+        - 199.36.153.10
+        - 199.36.153.11
+        ttl: '300'
+        type: A
+

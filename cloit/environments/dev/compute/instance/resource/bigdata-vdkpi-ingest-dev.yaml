@@ -1,0 +1,715 @@
+---
+# JIRA Number : BDP-124026
+# Description: [작업에 대한 간단한 설명을 적어주세요]
+# 요청자 : [요청자의 이름을 적어주세요]
+deletionProtection: false
+disks:
+  - autoDelete: true
+    boot: true
+    deviceName: cloit-d-ingest-ce-ansible-test-an3a-001
+    index: 0
+    mode: READ_WRITE
+    source: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a/disks/cloit-d-ingest-ce-ansible-test-an3a-001
+    type: PERSISTENT
+machineType: e2-custom-4-3584
+metadata:
+  items:
+    - key: enable-oslogin
+      value: 'FALSE'
+    - key: IPA_TAGS
+      value: cli
+    - key: startup-script
+      value: '#! /bin/bash
+
+      sed -i ''s/SELINUX=enforcing/SELINUX=disabled/g'' /etc/selinux/config
+
+      sed -i ''s/#Port 22/Port 20022/g'' /etc/ssh/sshd_config
+
+      sed -i ''s/#PasswordAuthentication yes/PasswordAuthentication no/g'' /etc/ssh/sshd_config
+
+      service sshd restart'
+    - key: block-project-ssh-keys
+      value: 'true'
+name: cloit-d-ingest-ce-ansible-test-an3a-001
+networkInterfaces:
+  - network: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/global/networks/cloit-d-host-vpc
+    networkIP: 172.30.0.71
+    subnetwork: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-system-an3
+scheduling:
+  automaticRestart: true
+  onHostMaintenance: MIGRATE
+  provisioningModel: STANDARD
+serviceAccounts:
+  - email: cloit-d-ingest-gsa-cli-common@cloit-ingest-dev.iam.gserviceaccount.com
+    scopes:
+      - https://www.googleapis.com/auth/cloud-platform
+shieldedInstanceConfig:
+  enableIntegrityMonitoring: true
+  enableSecureBoot: false
+  enableVtpm: true
+tags:
+  items:
+    - ansible-test
+    - ipa
+    - niffler
+    - cloit-d-net-ce-common
+zone: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a
+---
+# JIRA Number : [여기에 JIRA 번호를 적어주세요]
+# Description: [작업에 대한 간단한 설명을 적어주세요]
+# 요청자 : [요청자의 이름을 적어주세요]
+deletionProtection: true
+disks:
+  - autoDelete: true
+    boot: true
+    deviceName: cloit-d-ingest-ce-batch-an3a-001
+    index: 0
+    mode: READ_WRITE
+    source: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a/disks/cloit-d-ingest-ce-batch-an3a-001
+labels:
+  component: kpi
+  name: cloit-d-ingest-ce-batch-an3a-001
+  owner: junha01_hwang
+  sec_assets_gateway: "n"
+  sec_assets_pii: "n"
+  service: vdkpi
+  stage: dev
+machineType: n1-standard-1
+metadata:
+  items:
+    - key: IPA_TAGS
+      value: dls
+    - key: enable-oslogin
+      value: 'FALSE'
+    - key: block-project-ssh-keys
+      value: 'true'
+name: cloit-d-ingest-ce-batch-an3a-001
+networkInterfaces:
+  - network: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/global/networks/cloit-d-host-vpc
+    networkIP: 172.30.0.140
+    subnetwork: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-ce-an3
+scheduling:
+  automaticRestart: true
+  onHostMaintenance: MIGRATE
+  provisioningModel: STANDARD
+serviceAccounts:
+  - email: cloit-d-ingest-gsa-batch-ce@cloit-ingest-dev.iam.gserviceaccount.com
+    scopes:
+      - https://www.googleapis.com/auth/cloud-platform
+shieldedInstanceConfig:
+  enableIntegrityMonitoring: true
+  enableSecureBoot: false
+  enableVtpm: true
+tags:
+  items:
+    - ipa
+    - cloit-d-net-ce-batch
+zone: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a
+
+---
+# JIRA Number : [여기에 JIRA 번호를 적어주세요]
+# Description: [작업에 대한 간단한 설명을 적어주세요]
+# 요청자 : [요청자의 이름을 적어주세요]
+
+deletionProtection: true
+disks:
+  - autoDelete: true
+    boot: true
+    deviceName: cloit-d-ingest-ce-cli-an3a-001
+    index: 0
+    mode: READ_WRITE
+    source: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a/disks/cloit-d-ingest-ce-cli-an3a-001
+    type: PERSISTENT
+labels:
+  component: kpi
+  name: cloit-d-ingest-ce-cli-an3a-001
+  owner: junha01_hwang
+  sec_assets_gateway: "n"
+  sec_assets_pii: "n"
+  service: vdkpi
+  stage: dev
+machineType: n1-standard-2
+metadata:
+  items:
+    - key: IPA_TAGS
+      value: cli
+    - key: enable-oslogin
+      value: 'FALSE'
+    - key: block-project-ssh-keys
+      value: 'true'
+name: cloit-d-ingest-ce-cli-an3a-001
+networkInterfaces:
+  - network: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/global/networks/cloit-d-host-vpc
+    networkIP: 172.30.0.100
+    subnetwork: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-system-an3
+scheduling:
+  automaticRestart: true
+  onHostMaintenance: MIGRATE
+  provisioningModel: STANDARD
+selfLink: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a/instances/cloit-d-ingest-ce-cli-an3a-001
+serviceAccounts:
+  - email: cloit-d-ingest-gsa-cli-common@cloit-ingest-dev.iam.gserviceaccount.com
+    scopes:
+      - https://www.googleapis.com/auth/cloud-platform
+shieldedInstanceConfig:
+  enableIntegrityMonitoring: true
+  enableSecureBoot: false
+  enableVtpm: true
+tags:
+  items:
+    - ipa
+    - niffler
+    - cloit-d-net-ce-common
+zone: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a
+
+---
+# JIRA Number : [여기에 JIRA 번호를 적어주세요]
+# Description: [작업에 대한 간단한 설명을 적어주세요]
+# 요청자 : [요청자의 이름을 적어주세요]
+
+deletionProtection: true
+disks:
+  - autoDelete: true
+    boot: true
+    deviceName: cloit-d-ingest-ce-db-cli-an3a-001
+    index: 0
+    mode: READ_WRITE
+    source: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a/disks/cloit-d-ingest-ce-db-cli-an3a-001
+labels:
+  component: kpi
+  name: cloit-d-ingest-ce-db-cli-an3a-001
+  owner: junha01_hwang
+  sec_assets_gateway: "n"
+  sec_assets_pii: "n"
+  service: vdkpi
+  stage: dev
+machineType: n1-standard-2
+metadata:
+  items:
+    - key: IPA_TAGS
+      value: db
+    - key: enable-oslogin
+      value: 'FALSE'
+    - key: block-project-ssh-keys
+      value: 'true'
+name: cloit-d-ingest-ce-db-cli-an3a-001
+networkInterfaces:
+  - network: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/global/networks/cloit-d-host-vpc
+    networkIP: 172.30.0.109
+    stackType: IPV4_ONLY
+    subnetwork: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-system-an3
+scheduling:
+  automaticRestart: true
+  onHostMaintenance: MIGRATE
+  provisioningModel: STANDARD
+selfLink: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a/instances/cloit-d-ingest-ce-db-cli-an3a-001
+serviceAccounts:
+  - email: cloit-d-ingest-gsa-db-cli@cloit-ingest-dev.iam.gserviceaccount.com
+    scopes:
+      - https://www.googleapis.com/auth/cloud-platform
+shieldedInstanceConfig:
+  enableIntegrityMonitoring: true
+  enableSecureBoot: false
+  enableVtpm: true
+tags:
+  items:
+    - ipa
+    - niffler
+    - cloit-d-net-ce-db-cli
+zone: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a
+
+---
+# JIRA Number : [여기에 JIRA 번호를 적어주세요]
+# Description: [작업에 대한 간단한 설명을 적어주세요]
+# 요청자 : [요청자의 이름을 적어주세요]
+deletionProtection: true
+disks:
+  - autoDelete: true
+    boot: true
+    deviceName: cloit-d-ingest-ce-db-gateway-an3a-001
+    index: 0
+    mode: READ_WRITE
+    source: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a/disks/cloit-d-ingest-ce-db-gateway-an3a-001
+labels:
+  component: kpi
+  name: cloit-d-ingest-ce-db-gateway-an3a-001
+  owner: junha01_hwang
+  sec_assets_gateway: "y"
+  sec_assets_pii: "n"
+  service: vdkpi
+  stage: dev
+machineType: n1-standard-2
+metadata:
+  items:
+    - key: IPA_TAGS
+      value: db
+    - key: enable-oslogin
+      value: 'FALSE'
+    - key: block-project-ssh-keys
+      value: 'true'
+name: cloit-d-ingest-ce-db-gateway-an3a-001
+networkInterfaces:
+  - accessConfigs:
+      - natIP: 34.64.44.160
+        networkTier: PREMIUM
+    network: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/global/networks/cloit-d-host-vpc
+    networkIP: 172.30.0.3
+    subnetwork: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-dmz-an3
+scheduling:
+  automaticRestart: true
+  onHostMaintenance: MIGRATE
+  provisioningModel: STANDARD
+selfLink: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a/instances/cloit-d-ingest-ce-db-gateway-an3a-001
+serviceAccounts:
+  - email: cloit-d-ingest-gsa-gw-common@cloit-ingest-dev.iam.gserviceaccount.com
+    scopes:
+      - https://www.googleapis.com/auth/compute.readonly
+      - https://www.googleapis.com/auth/compute
+      - https://www.googleapis.com/auth/logging.write
+      - https://www.googleapis.com/auth/monitoring
+      - https://www.googleapis.com/auth/monitoring.read
+      - https://www.googleapis.com/auth/monitoring.write
+      - https://www.googleapis.com/auth/servicecontrol
+      - https://www.googleapis.com/auth/service.management.readonly
+      - https://www.googleapis.com/auth/devstorage.read_only
+      - https://www.googleapis.com/auth/userinfo.email
+shieldedInstanceConfig:
+  enableIntegrityMonitoring: true
+  enableSecureBoot: false
+  enableVtpm: true
+tags:
+  items:
+    - ipa
+    - cloit-d-net-db-gateway-common
+zone: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a
+
+---
+# JIRA Number : [여기에 JIRA 번호를 적어주세요]
+# Description: [작업에 대한 간단한 설명을 적어주세요]
+# 요청자 : [요청자의 이름을 적어주세요]
+
+deletionProtection: true
+disks:
+  - autoDelete: true
+    boot: true
+    deviceName: cloit-d-ingest-ce-dev-an3a-001
+    index: 0
+    mode: READ_WRITE
+    source: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a/disks/cloit-d-ingest-ce-dev-an3a-001
+labels:
+  component: kpi
+  name: cloit-d-ingest-ce-dev-an3a-001
+  owner: junha01_hwang
+  sec_assets_gateway: "n"
+  sec_assets_pii: "n"
+  service: vdkpi
+  stage: dev
+machineType: n2-standard-4
+metadata:
+  items:
+    - key: IPA_TAGS
+      value: dls
+    - key: enable-oslogin
+      value: 'FALSE'
+    - key: block-project-ssh-keys
+      value: 'true'
+name: cloit-d-ingest-ce-dev-an3a-001
+networkInterfaces:
+  - network: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/global/networks/cloit-d-host-vpc
+    networkIP: 172.30.0.208
+    subnetwork: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-dev-an3
+scheduling:
+  automaticRestart: true
+  onHostMaintenance: MIGRATE
+  provisioningModel: STANDARD
+serviceAccounts:
+  - email: 108690838646-compute@developer.gserviceaccount.com
+    scopes:
+      - https://www.googleapis.com/auth/cloud-platform
+shieldedInstanceConfig:
+  enableIntegrityMonitoring: true
+  enableSecureBoot: false
+  enableVtpm: true
+tags:
+  items:
+    - ipa
+    - cloit-d-net-ce-dev
+zone: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a
+
+---
+# JIRA Number : [여기에 JIRA 번호를 적어주세요]
+# Description: [작업에 대한 간단한 설명을 적어주세요]
+# 요청자 : [요청자의 이름을 적어주세요]
+
+deletionProtection: true
+disks:
+  - autoDelete: true
+    boot: true
+    deviceName: cloit-d-ingest-ce-gateway-an3a-001
+    index: 0
+    mode: READ_WRITE
+    source: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a/disks/cloit-d-ingest-ce-gateway-an3a-001
+labels:
+  component: kpi
+  name: cloit-d-ingest-ce-gateway-an3a-001
+  owner: junha01_hwang
+  sec_assets_gateway: "y"
+  sec_assets_pii: "n"
+  service: vdkpi
+  stage: dev
+machineType: n1-standard-2
+metadata:
+  items:
+    - key: IPA_TAGS
+      value: gw
+    - key: enable-oslogin
+      value: 'FALSE'
+    - key: block-project-ssh-keys
+      value: 'true'
+name: cloit-d-ingest-ce-gateway-an3a-001
+networkInterfaces:
+  - accessConfigs:
+      - natIP: 34.64.187.3
+        networkTier: PREMIUM
+    network: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/global/networks/cloit-d-host-vpc
+    networkIP: 172.30.0.2
+    subnetwork: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-dmz-an3
+scheduling:
+  automaticRestart: true
+  onHostMaintenance: MIGRATE
+  provisioningModel: STANDARD
+selfLink: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a/instances/cloit-d-ingest-ce-gateway-an3a-001
+serviceAccounts:
+  - email: cloit-d-ingest-gsa-gw-common@cloit-ingest-dev.iam.gserviceaccount.com
+    scopes:
+      - https://www.googleapis.com/auth/compute.readonly
+      - https://www.googleapis.com/auth/compute
+      - https://www.googleapis.com/auth/logging.write
+      - https://www.googleapis.com/auth/monitoring
+      - https://www.googleapis.com/auth/monitoring.read
+      - https://www.googleapis.com/auth/monitoring.write
+      - https://www.googleapis.com/auth/servicecontrol
+      - https://www.googleapis.com/auth/service.management.readonly
+      - https://www.googleapis.com/auth/devstorage.read_only
+      - https://www.googleapis.com/auth/userinfo.email
+shieldedInstanceConfig:
+  enableIntegrityMonitoring: true
+  enableSecureBoot: false
+  enableVtpm: true
+tags:
+  items:
+    - ipa
+    - cloit-d-net-gateway-common
+zone: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a
+
+---
+# JIRA Number : [여기에 JIRA 번호를 적어주세요]
+# Description: [작업에 대한 간단한 설명을 적어주세요]
+# 요청자 : [요청자의 이름을 적어주세요]
+
+deletionProtection: true
+disks:
+  - autoDelete: true
+    boot: true
+    deviceName: cloit-d-ingest-ce-lcs-loguploader-an3a-001
+    index: 0
+    interface: SCSI
+    mode: READ_WRITE
+    source: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a/disks/cloit-d-ingest-ce-lcs-loguploader-an3a-001
+  - autoDelete: false
+    boot: false
+    deviceName: persistent-disk-1
+    index: 1
+    mode: READ_WRITE
+    source: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a/disks/cloit-d-ingest-ce-lcs-loguploader-an3a-001-temp
+labels:
+  component: kpi
+  name: cloit-d-ingest-ce-lcs-loguploader-an3a-001
+  sec_asset_pii: "n"
+  sec_assets: vdkpi_system
+  service: vdkpi
+  stage: dev
+machineType: n2-standard-2
+metadata:
+  items:
+    - key: IPA_TAGS
+      value: dls
+    - key: enable-osconfig
+      value: 'FALSE'
+    - key: startup-script
+      value: '#! /bin/bash
+
+      sed -i ''s/SELINUX=enforcing/SELINUX=disabled/g'' /etc/selinux/config
+
+      sed -i ''s/#Port 22/Port 20022/g'' /etc/ssh/sshd_config
+
+      sed -i ''s/#PasswordAuthentication yes/PasswordAuthentication no/g'' /etc/ssh/sshd_config
+
+      service sshd restart'
+    - key: block-project-ssh-keys
+      value: 'true'
+name: cloit-d-ingest-ce-lcs-loguploader-an3a-001
+networkInterfaces:
+  - network: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/global/networks/cloit-d-host-vpc
+    networkIP: 172.30.0.170
+    subnetwork: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-ce-an3
+scheduling:
+  automaticRestart: true
+  onHostMaintenance: MIGRATE
+  provisioningModel: STANDARD
+serviceAccounts:
+  - email: dev-ce-loguploader@cloit-ingest-dev.iam.gserviceaccount.com
+    scopes:
+      - https://www.googleapis.com/auth/cloud-platform
+shieldedInstanceConfig:
+  enableIntegrityMonitoring: true
+  enableSecureBoot: false
+  enableVtpm: true
+tags:
+  items:
+    - ipa
+    - cloit-d-net-ce-loguploader
+zone: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a
+
+---
+# JIRA Number : [여기에 JIRA 번호를 적어주세요]
+# Description: [작업에 대한 간단한 설명을 적어주세요]
+# 요청자 : [요청자의 이름을 적어주세요]
+
+deletionProtection: true
+disks:
+  - autoDelete: true
+    boot: true
+    deviceName: cloit-d-ingest-ce-openapi-an3a-001
+    index: 0
+    interface: SCSI
+    licenses:
+      - https://www.googleapis.com/compute/v1/projects/ubuntu-os-cloud/global/licenses/ubuntu-2204-lts
+    mode: READ_WRITE
+    source: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a/disks/cloit-d-ingest-ce-openapi-an3a-001
+labels:
+  component: kpi
+  name: cloit-d-ingest-ce-openapi-an3a-001
+  owner: junha01_hwang
+  sec_assets_gateway: "n"
+  sec_assets_pii: "n"
+  service: vdkpi
+  stage: dev
+machineType: n1-standard-1
+metadata:
+  items:
+    - key: IPA_TAGS
+      value: dls
+    - key: block-project-ssh-keys
+      value: 'true'
+name: cloit-d-ingest-ce-openapi-an3a-001
+networkInterfaces:
+  - network: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/global/networks/cloit-d-host-vpc
+    networkIP: 172.30.0.130
+    stackType: IPV4_ONLY
+    subnetwork: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-ce-an3
+scheduling:
+  automaticRestart: true
+  onHostMaintenance: MIGRATE
+  provisioningModel: STANDARD
+serviceAccounts:
+  - email: cloit-d-ingest-gsa-openapi-ce@cloit-ingest-dev.iam.gserviceaccount.com
+    scopes:
+      - https://www.googleapis.com/auth/cloud-platform
+shieldedInstanceConfig:
+  enableIntegrityMonitoring: true
+  enableSecureBoot: false
+  enableVtpm: true
+tags:
+  items:
+    - ipa
+    - niffler
+    - cloit-d-net-ce-openapi
+    - cloit-d-net-ce-openapi-preprd
+zone: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a
+
+---
+# JIRA Number : [여기에 JIRA 번호를 적어주세요]
+# Description: [작업에 대한 간단한 설명을 적어주세요]
+# 요청자 : [요청자의 이름을 적어주세요]
+
+deletionProtection: true
+disks:
+  - autoDelete: true
+    boot: true
+    deviceName: cloit-d-ingest-ce-smtp-an3a-001
+    index: 0
+    mode: READ_WRITE
+    source: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a/disks/cloit-d-ingest-ce-smtp-an3a-001
+labels:
+  component: kpi
+  name: cloit-d-ingest-ce-smtp-an3a-001
+  owner: junha01_hwang
+  sec_asset_pii: "n"
+  sec_assets_gateway: "n"
+  service: vdkpi
+  stage: dev
+machineType: n1-standard-1
+metadata:
+  items:
+    - key: IPA_TAGS
+      value: dls
+    - key: enable-osconfig
+      value: 'FALSE'
+    - key: startup-script
+      value: '#! /bin/bash
+
+      sed -i ''s/#Port 22/Port 20022/g'' /etc/ssh/sshd_config
+
+      sed -i ''s/#PasswordAuthentication yes/PasswordAuthentication no/g'' /etc/ssh/sshd_config
+
+      service sshd restart'
+name: cloit-d-ingest-ce-smtp-an3a-001
+networkInterfaces:
+  - network: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/global/networks/cloit-d-host-vpc
+    networkIP: 172.30.0.135
+    stackType: IPV4_ONLY
+    subnetwork: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-ce-an3
+scheduling:
+  automaticRestart: true
+  onHostMaintenance: MIGRATE
+  provisioningModel: STANDARD
+selfLink: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a/instances/cloit-d-ingest-ce-smtp-an3a-001
+serviceAccounts:
+  - email: ce-smtp@cloit-ingest-dev.iam.gserviceaccount.com
+    scopes:
+      - https://www.googleapis.com/auth/cloud-platform
+shieldedInstanceConfig:
+  enableIntegrityMonitoring: true
+  enableSecureBoot: false
+  enableVtpm: true
+tags:
+  items:
+    - ipa
+    - niffler
+    - cloit-d-net-ce-smtp
+zone: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-a
+
+---
+# JIRA Number : [여기에 JIRA 번호를 적어주세요]
+# Description: [작업에 대한 간단한 설명을 적어주세요]
+# 요청자 : [요청자의 이름을 적어주세요]
+
+deletionProtection: true
+disks:
+  - autoDelete: true
+    boot: true
+    deviceName: cloit-d-ingest-ce-dashboard-an3b-001
+    index: 0
+    mode: READ_WRITE
+    source: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-b/disks/cloit-d-ingest-ce-dashboard-an3b-001
+labels:
+  component: kpi
+  name: cloit-d-ingest-ce-dashboard-an3b-001
+  owner: junha01_hwang
+  sec_asset_pii: "n"
+  sec_assets_gateway: "n"
+  service: vdkpi
+  stage: dev
+machineType: n2-standard-2
+metadata:
+  items:
+    - key: IPA_TAGS
+      value: dls
+    - key: enable-oslogin
+      value: 'FALSE'
+    - key: startup-script
+      value: '#! /bin/bash
+
+      sed -i ''s/#Port 22/Port 20022/g'' /etc/ssh/sshd_config
+
+      sed -i ''s/#PasswordAuthentication yes/PasswordAuthentication no/g'' /etc/ssh/sshd_config
+
+      service sshd restart'
+    - key: block-project-ssh-keys
+      value: 'true'
+name: cloit-d-ingest-ce-dashboard-an3b-001
+networkInterfaces:
+  - network: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/global/networks/cloit-d-host-vpc
+    networkIP: 172.30.0.160
+    stackType: IPV4_ONLY
+    subnetwork: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-ce-an3
+scheduling:
+  automaticRestart: true
+  onHostMaintenance: MIGRATE
+  provisioningModel: STANDARD
+serviceAccounts:
+  - email: ce-dashboard@cloit-ingest-dev.iam.gserviceaccount.com
+    scopes:
+      - https://www.googleapis.com/auth/cloud-platform
+shieldedInstanceConfig:
+  enableIntegrityMonitoring: true
+  enableSecureBoot: false
+  enableVtpm: true
+tags:
+  items:
+    - ipa
+    - cloit-d-net-ce-dashboard
+zone: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-b
+
+---
+# JIRA Number : [여기에 JIRA 번호를 적어주세요]
+# Description: [작업에 대한 간단한 설명을 적어주세요]
+# 요청자 : [요청자의 이름을 적어주세요]
+
+deletionProtection: true
+disks:
+  - autoDelete: true
+    boot: true
+    deviceName: cloit-d-ingest-ce-lcs-loguploader-an3b-001
+    index: 0
+    mode: READ_WRITE
+    source: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-b/disks/cloit-d-ingest-ce-lcs-loguploader-an3b-001
+labels:
+  component: kpi
+  name: cloit-d-ingest-ce-lcs-loguploader-an3b-001
+  sec_asset_pii: "n"
+  sec_assets: vdkpi_system
+  service: vdkpi
+  stage: dev
+machineType: n2-standard-8
+metadata:
+  items:
+    - key: IPA_TAGS
+      value: dls
+    - key: startup-script
+      value: '#! /bin/bash
+
+      sed -i ''s/SELINUX=enforcing/SELINUX=disabled/g'' /etc/selinux/config
+
+      sed -i ''s/#Port 22/Port 20022/g'' /etc/ssh/sshd_config
+
+      sed -i ''s/#PasswordAuthentication yes/PasswordAuthentication no/g'' /etc/ssh/sshd_config
+
+      service sshd restart'
+    - key: block-project-ssh-keys
+      value: 'true'
+name: cloit-d-ingest-ce-lcs-loguploader-an3b-001
+networkInterfaces:
+  - network: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/global/networks/cloit-d-host-vpc
+    networkIP: 172.30.0.171
+    subnetwork: https://www.googleapis.com/compute/v1/projects/cloit-host-dev/regions/asia-northeast3/subnetworks/cloit-d-sub-ingest-ce-an3
+scheduling:
+  automaticRestart: true
+  onHostMaintenance: MIGRATE
+  provisioningModel: STANDARD
+serviceAccounts:
+  - email: dev-ce-loguploader@cloit-ingest-dev.iam.gserviceaccount.com
+    scopes:
+      - https://www.googleapis.com/auth/cloud-platform
+shieldedInstanceConfig:
+  enableIntegrityMonitoring: true
+  enableSecureBoot: false
+  enableVtpm: true
+tags:
+  items:
+    - ipa
+    - cloit-d-net-ce-loguploader
+zone: https://www.googleapis.com/compute/v1/projects/cloit-ingest-dev/zones/asia-northeast3-b
+
+

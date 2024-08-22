@@ -1,0 +1,4 @@
+- name: cloit-d-host-vpc
+  mtu: 1460
+  routing_mode: REGIONAL
+  shared_vpc_host: true
